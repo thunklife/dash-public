@@ -12,6 +12,7 @@ Installation
 	λ npm run serve
 
 if ```npm run serve``` throws:
+
 	λ npm install -g http-server
 	λ http-server
 
