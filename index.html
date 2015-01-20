@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DashJS Test (unmodified source)</title>
+		<script src='lib/dash/lib/dijon.js'></script>
+		<script src='lib/dash/lib/xml2json.js'></script>
+		<script src='lib/dash/lib/long.js'></script>
+		<script src='lib/dash/lib/Math.js'></script>
+		<script src='lib/dash/lib/objectiron.js'></script>
+		<script src='lib/dash/lib/q.js'></script>
+		<script src='lib/dash/lib/base64.js'></script>
+		<script src='lib/dash/dash/Dash.js'></script>
+		<script src='lib/dash/streaming/MediaPlayer.js'></script>
+		<script src='lib/dash/streaming/Context.js'></script>
+		<script src='lib/dash/dash/DashContext.js'></script>
+		<script src='lib/dash/dash/BaseURLExtensions.js'></script>
+		<script src='lib/dash/dash/DashHandler.js'></script>
+		<script src='lib/dash/dash/DashManifestExtensions.js'></script>
+		<script src='lib/dash/dash/DashMetricsExtensions.js'></script>
+		<script src='lib/dash/dash/DashParser.js'></script>
+		<script src='lib/dash/dash/FragmentExtensions.js'></script>
+		<script src='lib/dash/dash/TimelineConverter.js'></script>
+		<script src='lib/dash/dash/vo/AdaptationSet.js'></script>
+		<script src='lib/dash/dash/vo/Event.js'></script>
+		<script src='lib/dash/dash/vo/EventStream.js'></script>
+		<script src='lib/dash/dash/vo/Mpd.js'></script>
+		<script src='lib/dash/dash/vo/Period.js'></script>
+		<script src='lib/dash/dash/vo/Representation.js'></script>
+		<script src='lib/dash/dash/vo/Segment.js'></script>
+		<script src='lib/dash/streaming/rules/BaseRulesCollection.js'></script>
+		<script src='lib/dash/streaming/rules/DownloadRatioRule.js'></script>
+		<script src='lib/dash/streaming/rules/InsufficientBufferRule.js'></script>
+		<script src='lib/dash/streaming/rules/LimitSwitchesRule.js'></script>
+		<script src='lib/dash/streaming/rules/SwitchRequest.js'></script>
+		<script src='lib/dash/streaming/AbrController.js'></script>
+		<script src='lib/dash/streaming/BufferController.js'></script>
+		<script src='lib/dash/streaming/BufferExtensions.js'></script>
+		<script src='lib/dash/streaming/Capabilities.js'></script>
+		<script src='lib/dash/streaming/Debug.js'></script>
+		<script src='lib/dash/streaming/ErrorHandler.js'></script>
+		<script src='lib/dash/streaming/EventBus.js'></script>
+		<script src='lib/dash/streaming/EventController.js'></script>
+		<script src='lib/dash/streaming/FragmentController.js'></script>
+		<script src='lib/dash/streaming/FragmentLoader.js'></script>
+		<script src='lib/dash/streaming/FragmentModel.js'></script>
+		<script src='lib/dash/streaming/ManifestLoader.js'></script>
+		<script src='lib/dash/streaming/ManifestModel.js'></script>
+		<script src='lib/dash/streaming/ManifestUpdater.js'></script>
+		<script src='lib/dash/streaming/MediaSourceExtensions.js'></script>
+		<script src='lib/dash/streaming/MetricsModel.js'></script>
+		<script src='lib/dash/streaming/ProtectionController.js'></script>
+		<script src='lib/dash/streaming/ProtectionExtensions.js'></script>
+		<script src='lib/dash/streaming/ProtectionModel.js'></script>
+		<script src='lib/dash/streaming/SourceBufferExtensions.js'></script>
+		<script src='lib/dash/streaming/Stream.js'></script>
+		<script src='lib/dash/streaming/StreamController.js'></script>
+		<script src='lib/dash/streaming/TokenAuthentication.js'></script>
+		<script src='lib/dash/streaming/URIQueryAndFragmentModel.js'></script>
+		<script src='lib/dash/streaming/VideoModel.js'></script>
+		<script src='lib/dash/streaming/VideoModelExtensions.js'></script>
+		<script src='lib/dash/streaming/RequestScheduler.js'></script>
+		<script src='lib/dash/streaming/SchedulerExtensions.js'></script>
+		<script src='lib/dash/streaming/SchedulerModel.js'></script>
+		<script src='lib/dash/streaming/captioning/TextController.js'></script>
+		<script src='lib/dash/streaming/captioning/TextSourceBuffer.js'></script>
+		<script src='lib/dash/streaming/captioning/TextTrackExtensions.js'></script>
+		<script src='lib/dash/streaming/captioning/TTMLParser.js'></script>
+		<script src='lib/dash/streaming/captioning/VTTParser.js'></script>
+		<script src='lib/dash/streaming/vo/MetricsList.js'></script>
+		<script src='lib/dash/streaming/vo/URIFragmentData.js'></script>
+		<script src='lib/dash/streaming/vo/SegmentRequest.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/BufferLevel.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/DroppedFrames.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/DVRInfo.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/HTTPRequest.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/ManifestUpdate.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/PlayList.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/RepresentationSwitch.js'></script>
+		<script src='lib/dash/streaming/vo/metrics/TCPConnection.js'></script>
+	</head>
+	<body>
+		<h1>DashJS Player Prototype</h1>
+		<form>
+			<input  id="url" type="text" placeholder="Manifest URL"/>
+			<button id="load">Load</button>
+		</form>
+		<video id="dash-player" controls></video>
+		<script>
+			(function(){
+				var e = document.getElementById('dash-player');
+				var d = new Dash.di.DashContext();
+				var m = new MediaPlayer(d);
+				var i = document.getElementById('url');
+				document.getElementById('load').addEventListener('click', function(e){
+					e.preventDefault();
+					if(i.value){
+						m.attachSource(i.value);
+					}
+				});
+				m.startup();
+				m.attachView(e);
+			})();
+		</script>
+	</body>
+</html>

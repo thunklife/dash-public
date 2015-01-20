@@ -1,0 +1,15 @@
+{
+  "name": "dash-untouched",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1", 
+		"serve": "http-server"
+  },
+  "author": "wilhelmson",
+  "license": "BSD3",
+  "devDependencies": {
+    "http-server": "^0.7.4"
+  }
+}
